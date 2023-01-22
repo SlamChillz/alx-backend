@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import csv
 import math
 from typing import Dict, List, Tuple, Union
@@ -44,7 +45,8 @@ class Server:
         startIndex, endIndex = self.index_range(page, page_size)
         return self.dataset()[startIndex:endIndex]
 
-    def get_hyper(self, page: int, page_size: int) -> Dict[str, Union[int, List[List], None]]:
+    def get_hyper(self, page: int,
+                  page_size: int) -> Dict[str, Union[int, List[List], None]]:
         """
         Args:
             page (int): page number
