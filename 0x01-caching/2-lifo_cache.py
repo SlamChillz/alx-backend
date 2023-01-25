@@ -25,7 +25,7 @@ class LIFOCache(BaseCaching):
         """ Add an item in the cache
         """
         if key is not None and item is not None:
-            keyOut = self._evict(key)
+            keyOut = self._balance(key)
             with self.__rlock:
                 self.cache_data.update({key: item})
             if keyOut is not None:
@@ -37,7 +37,7 @@ class LIFOCache(BaseCaching):
         with self.__rlock:
             return self.cache_data.get(key, None)
 
-    def _evict(self, keyIn):
+    def _balance(self, keyIn):
         """ Removes the earliest item from the cache at MAX size
         """
         keyOut = None
