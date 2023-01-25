@@ -26,7 +26,8 @@ class FIFOCache(BaseCaching):
         """
         if key is not None and item is not None:
             keyOut = self._balance(key)
-            self.cache_data.update({key: item})
+            with self.__rlock:
+                self.cache_data.update({key: item})
             if keyOut is not None:
                 print('DISCARD: {}'.format(keyOut))
 
