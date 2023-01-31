@@ -6,7 +6,6 @@ import pytz
 from typing import (
     Dict, Union
 )
-from datetime import datetime
 
 from flask import Flask
 from flask import g, request
@@ -82,7 +81,7 @@ def get_timezone() -> str:
 
 
 @app.before_request
-def before_request():
+def before_request() -> None:
     """
     Adds valid user to the global session object `g`
     """
