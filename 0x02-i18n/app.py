@@ -48,7 +48,7 @@ def get_user(id) -> Union[Dict[str, Union[str, None]], None]:
     Returns:
         (Dict): user dictionary if id is valid else None
     """
-    return users.get(int(id), {})
+    return users.get(int(id), None)
 
 
 @babel.localeselector
