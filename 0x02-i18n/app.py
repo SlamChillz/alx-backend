@@ -3,6 +3,7 @@
 A Basic flask application
 """
 import pytz
+import datetime
 from typing import (
     Dict, Union
 )
@@ -75,9 +76,10 @@ def get_timezone() -> str:
     if not tz and g.user:
         tz = g.user['timezone']
     try:
-        return pytz.timezone(tz).zone
+        tz = pytz.timezone(tz).zone
     except pytz.exceptions.UnknownTimeZoneError:
-        return app.config['BABEL_DEFAULT_TIMEZONE']
+        tz = app.config['BABEL_DEFAULT_TIMEZONE']
+    return tz
 
 
 @app.before_request
@@ -86,6 +88,7 @@ def before_request() -> None:
     Adds valid user to the global session object `g`
     """
     setattr(g, 'user', get_user(request.args.get('login_as', 0)))
+    setattr(g, 'time', format_datetime(datetime.datetime.now()))
 
 
 @app.route('/', strict_slashes=False)
@@ -93,7 +96,6 @@ def index() -> str:
     """
     Renders a basic html template
     """
-    g.time = format_datetime()
     return render_template('index.html')
 
 
