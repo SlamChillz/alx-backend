@@ -1,14 +1,15 @@
+#!/usr/bin/node
 /**
  * Connect to redis server via redis client
  */
-import { createClient } from "redis";
+import { createClient } from 'redis';
 
-let client;
+const client = createClient();
 
-(async function() {
-  client = createClient();
-  client.on('error', err => console.log("Redis client not connected to the server: ", err));
-  await client.connect();
-  console.log("Redis client connected to the server");
-  await client.disconnect()
-})();
+client.on('error', (err) => {
+  console.log('Redis client not connected to the server:', err.toString());
+});
+
+client.on('connect', () => {
+  console.log('Redis client connected to the server');
+});
