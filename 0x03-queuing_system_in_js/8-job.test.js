@@ -49,6 +49,7 @@ describe('createPushNotificationsJobs', () => {
     createPushNotificationsJobs(jobs, queue);
     expect(queue.testMode.jobs.length).to.equal(1);
     expect(queue.testMode.jobs[0].type).to.equal('push_notification_code_3');
+    expect(queue.testMode.jobs[0].data).to.eql(jobs[0]);
     expect(console.log.calledOnceWith(`Notification job created: ${queue.testMode.jobs[0].id}`)).to.be.true;
   });
 

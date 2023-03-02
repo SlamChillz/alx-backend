@@ -6,7 +6,7 @@ function createPushNotificationsJobs(jobs, queue) {
   if (!(jobs instanceof Array)) {
     throw new Error('Jobs is not an array');
   }
-  for (let job in jobs) {
+  for (let job of jobs) {
     job = queue.create('push_notification_code_3', job);
     job
       .on('complete', (result) => { /* eslint-disable-line no-unused-vars */
