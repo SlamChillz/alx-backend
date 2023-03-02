@@ -1,3 +1,4 @@
+#!/usr/bin/node
 /**
  * Create a job
  */
